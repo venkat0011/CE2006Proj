@@ -29,7 +29,7 @@ public class ModifyParticulars_control
             }
         }
 
-        public static boolean CheckStudentinfo(String name, String location, int age, String citizenship) {
+        public static boolean CheckStudentinfo(String name, String location, String age, String citizenship) {
             // postal code
 //            Log.e("nam,citizen",name+" "+location+":"+ citizenship);
 //            Log.e("a", String.valueOf(age));
@@ -66,7 +66,7 @@ public class ModifyParticulars_control
 
         }
 
-        public static String UpdateStudent(String name, String location, String citizen,int age, Student oldStudent)
+        public static String UpdateStudent(String name, String location, String citizen,String age, Student oldStudent)
         {
             if(CheckStudentinfo(name,location,age,citizen))
             {
@@ -74,7 +74,7 @@ public class ModifyParticulars_control
                 // remove the old student from the list
                 ArrayList<Student> students = UserDatabase.user.getChildren_List();
                 students.remove(oldStudent);
-                Student student = new Student(name,location,age+2,citizen);
+                Student student = new Student(name,location,age,citizen);
                 students.add(student);
                 UserDatabase.user.setChildren_List(students);
                 UserDatabase.UpdateUser(UserDatabase.user);
@@ -87,7 +87,7 @@ public class ModifyParticulars_control
             }
         }
 
-        public static String AddStudent(String name, String location, String citizen,int age)
+        public static String AddStudent(String name, String location, String citizen,String age)
         {
             if(CheckStudentinfo(name,location,age,citizen))
             {

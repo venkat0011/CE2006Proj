@@ -25,6 +25,9 @@ public class MainPage extends AppCompatActivity {
     }
     public void FindSchool(View view)
     {
+        // have to check if they have children first
+        // if dont have ask them to add then brion them to the add children page
+        // guest mode can only add
         OptionControl.option_context = MainPage.this;
         OptionControl.FindSchool();
     }

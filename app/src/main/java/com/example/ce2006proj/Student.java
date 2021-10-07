@@ -3,11 +3,11 @@ package com.example.ce2006proj;
 public class Student
 {
     private String name;
-    private int age;
+    private String age;
     private String citizenship;
     private String Location;
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
@@ -20,7 +20,7 @@ public class Student
         return name;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -39,7 +39,7 @@ public class Student
     public String getLocation() {
         return Location;
     }
-    public Student (String name, String location, int age, String citizenship)
+    public Student (String name, String location, String age, String citizenship)
     {
         this.name = name;
         this.Location = location;

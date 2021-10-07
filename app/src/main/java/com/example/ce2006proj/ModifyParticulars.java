@@ -50,22 +50,13 @@ public class ModifyParticulars extends AppCompatActivity {
         builder.setView(customLayout);
 
         Spinner spinner = customLayout.findViewById(R.id.citizenship_status);
-        String[] items = new String[]{"1","2","3"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        Spinner age_spinner = customLayout.findViewById(R.id.age_spinner);
+        String[] citizen = new String[] {"Citizen","PR","Other"};
+        String[] age_group = new String[]{"2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, citizen);
         spinner.setAdapter(adapter1);
-        final String[] citizenship = {""};
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                citizenship[0] = items[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, age_group);
+        age_spinner.setAdapter(adapter2);
         // add a button
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
@@ -73,9 +64,9 @@ public class ModifyParticulars extends AppCompatActivity {
                 // send data from the AlertDialog to the Activity
                 EditText name = customLayout.findViewById(R.id.child_name);
                 EditText location = customLayout.findViewById(R.id.location);
-                SeekBar seekBar = customLayout.findViewById(R.id.seekBar);
-                String error_message = ModifyParticulars_control.AddStudent(name.getText().toString(),location.getText().toString()
-                ,citizenship[0],seekBar.getProgress());
+
+                String error_message = ModifyParticulars_control.AddStudent(name.getText().toString(),location.getText().toString(),
+                spinner.getSelectedItem().toString(),age_spinner.getSelectedItem().toString());
                 Snackbar.make(view, error_message, Snackbar.LENGTH_LONG)
                         .show();
                 adapter.notifyDataSetChanged();

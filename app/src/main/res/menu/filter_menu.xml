@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior = "all"/>
     <item android:title="Food">
 
         <menu>
@@ -8,20 +9,22 @@
             <group android:checkableBehavior="single">
 
                 <item
-                    android:id="@+id/MUIS"
+                    android:id="@+id/MUISa"
                     android:title="MUIS certified"
                     app:actionViewClass="android.widget.RadioButton" />
 
                 <item
-                    android:id="@+id/Halal"
+                    android:id="@+id/Halal2"
                     android:title="Halal(not MUIS certified)"
                     app:actionViewClass="android.widget.RadioButton"/>
 
                 <item
-                    android:id="@+id/Vege"
+                    android:id="@+id/Vege2"
                     android:title="Vegetarian"
                     app:actionViewClass="android.widget.RadioButton"/>
                            </group>
                        </menu>
                    </item>
+    <item android:title="Tranportation"
+        app:actionViewClass="android.widget.RadioButton"></item>
                </menu>

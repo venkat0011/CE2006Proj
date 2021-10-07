@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Food " />
+
+        <RadioButton
+            android:id="@+id/MUIS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MUIS Certified" />
+
+        <RadioButton
+            android:id="@+id/Halal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Halal (Not MUIS Certified)" />
+
+        <RadioButton
+            android:id="@+id/Vege"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian" />
+    </RadioGroup>
+</LinearLayout>

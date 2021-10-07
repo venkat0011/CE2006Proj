@@ -92,22 +92,28 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.ViewHo
                         name.setText(oldstudent.getName());
                         location.setText(oldstudent.getLocation());
 
-                        SeekBar seekBar = customLayout.findViewById(R.id.seekBar);
-                        seekBar.setProgress(oldstudent.getAge()-2);
                         Spinner spinner = customLayout.findViewById(R.id.citizenship_status);
-                        List items = Arrays.asList(new String[]{"2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"});
+                        List items = Arrays.asList(new String[] {"Citizen","PR","Other"});
                         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(mCtx, android.R.layout.simple_spinner_dropdown_item, items);
                         spinner.setAdapter(adapter1);
                         int index = items.indexOf(oldstudent.getCitizenship());
-
                         spinner.setSelection(index);
+
+                        Spinner age_spinner = customLayout.findViewById(R.id.age_spinner);
+                        List age_group = Arrays.asList(new String[]{"2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"});
+                        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(mCtx, android.R.layout.simple_spinner_dropdown_item, age_group);
+                        age_spinner.setAdapter(adapter2);
+                        int index1 = items.indexOf(oldstudent.getAge());
+                        age_spinner.setSelection(index1);
+
+
 
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // send data from the AlertDialog to the Activity
                                 String error_message = ModifyParticulars_control.UpdateStudent(name.getText().toString(),location.getText().toString()
-                                        ,spinner.getSelectedItem().toString(),seekBar.getProgress(),oldstudent);
+                                        ,spinner.getSelectedItem().toString(),age_spinner.getSelectedItem().toString(),oldstudent);
                                 Snackbar.make(view, error_message, Snackbar.LENGTH_LONG)
                                         .show();
                                 Log.e("as",spinner.getSelectedItem().toString());

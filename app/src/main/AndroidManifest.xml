@@ -41,6 +41,7 @@
             android:exported="true" />
         <activity
             android:name=".ModifyParticulars"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name=".MainPage"
