@@ -5,10 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FindSchool_Control {
-    public static Student getStudent()
-    {
-        return StudentDatabase.student;
-    }
 
 
 
@@ -16,7 +12,7 @@ public class FindSchool_Control {
     public List<String> FindDistrict(String postal_code)
     {
         ArrayList<List<String>> districts = new ArrayList<>();
-        districts.add(Arrays.asList("01", "02!", "03", "04", "05","06"));
+        districts.add(Arrays.asList("01", "02", "03", "04", "05","06"));
         districts.add(Arrays.asList("07","08"));
         districts.add(Arrays.asList("14","15","16"));
         districts.add(Arrays.asList("09","10"));
@@ -56,4 +52,99 @@ public class FindSchool_Control {
         return null;
 
     }
+
+    public static void  FindSchool(SchoolList_Callback callback) // by right this should a return of schools
+    {
+        // first call the service database to get the list of services that match the
+        // the age group of the student
+
+        // after we get the list of centre codes then we will send to the school database
+        // to find the list of school objects
+
+        ServiceDatabase.FetchServices(new ServiceCallBack() {
+            @Override
+            public void onResponse(ArrayList<Services> services) {
+                // we will do the for loop for each services here and display the list of schools
+               ArrayList<Schools> schools = new ArrayList<>();
+                for(Services services1: services)
+                {
+                    SchoolDatabase.FetchSchools(new SchoolCallBack() {
+                        @Override
+                        public void onCallback(Schools school) {
+                            schools.add(school);
+                        }
+                    },services1.getCentre_code());
+
+                }
+                callback.onCallBack(schools);
+            }
+        },AgeGroup(StudentDatabase.student.getAge())
+                ,Citizenship(StudentDatabase.student.getCitizenship()));
+
+
+
+    }
+
+    public static String AgeGroup (String age)
+    {
+        String agegroup;
+        switch (age)
+        {
+            case "2 to 18 mths":
+                agegroup = "Infant (2 to 18 mths)";
+                break;
+            case "18 mths to 2 yrs old":
+                agegroup = "Playgroup (18 mths to 2 yrs old)";
+                break;
+            case "3 yrs old":
+                agegroup = "Pre-Nursery (3 yrs old)";
+                break;
+            case "4 yrs old":
+                agegroup = "Nursery (4 yrs old)";
+                break;
+            case "5 yrs old":
+                agegroup ="Kindergarten 1 (5 yrs old)";
+                break;
+            case "6 yrs old":
+                agegroup = "Kindergarten 2 (6 yrs old)";
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + age);
+        }
+        return agegroup;
+    }
+
+    public static String Citizenship(String citizen)
+    {
+        String citizenship;
+        switch (citizen)
+        {
+            case "Citizen":
+                citizenship = "SC";
+                break;
+            case "PR":
+                citizenship = "SPR";
+                break;
+            case "Other":
+                citizenship = "Others";
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + citizen);
+        }
+        return citizenship;
+    }
+
+
+    public static Student getStudent()
+    {
+        return StudentDatabase.student;
+    }
+    public static void setStudent(Student student )
+    {
+        StudentDatabase.student = student;
+    }
+
+
 }

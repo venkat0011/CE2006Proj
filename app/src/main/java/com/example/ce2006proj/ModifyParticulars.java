@@ -52,7 +52,7 @@ public class ModifyParticulars extends AppCompatActivity {
         Spinner spinner = customLayout.findViewById(R.id.citizenship_status);
         Spinner age_spinner = customLayout.findViewById(R.id.age_spinner);
         String[] citizen = new String[] {"Citizen","PR","Other"};
-        String[] age_group = new String[]{"2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"};
+        String[] age_group = new String[]{ "2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, citizen);
         spinner.setAdapter(adapter1);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, age_group);

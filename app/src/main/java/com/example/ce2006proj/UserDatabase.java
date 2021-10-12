@@ -1,5 +1,6 @@
 package com.example.ce2006proj;
 
+import android.service.autofill.DateTransformation;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -23,31 +24,36 @@ public class UserDatabase
 
         // first need to check if the user is found in the system
         // if the user is found then we should display an error message
-        ref= ref.push();
-        ref.child("username").setValue(user.getUsername());
-        ref.child("password").setValue(user.getPassword());
-        ref.child("Children").setValue(user.getChildren_List());
+        DatabaseReference ref1= ref.push();
+        ref1.child("username").setValue(user.getUsername());
+        ref1.child("password").setValue(user.getPassword());
+        ref1.child("Children").setValue(user.getChildren_List());
+        Log.e("asd","register function called");
 
     }
 
-    public static void FetchUser(FirebaseUserCallback callback, String Username) {
-        Query query = ref.orderByChild("username").equalTo(Username);
+    public static void FetchUser(FirebaseUserCallback firebaseUserCallback,String username)
+    {
+        Query query = ref.orderByChild("username").equalTo(username);
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        User name = snapshot.getValue(User.class);
-                        FirebaseKey = snapshot.getKey();
-                        Log.e("name in loop", name.getUsername());
-                        callback.onResponse(name);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren())
+                    {
+                        User user1 = dataSnapshot.getValue(User.class);
+                        FirebaseKey = dataSnapshot.getKey();
+                        Log.e("key",FirebaseKey);
+                        firebaseUserCallback.onResponse(user1);
                         break;
+
                     }
                 }
                 else
                 {
-                    User name=  null;
-                    callback.onResponse(name);
+                    User user1=  null;
+                    firebaseUserCallback.onResponse(user1);
                 }
             }
 
@@ -56,7 +62,6 @@ public class UserDatabase
 
             }
         };
-
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 

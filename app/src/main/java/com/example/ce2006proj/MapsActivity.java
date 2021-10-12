@@ -21,6 +21,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.ce2006proj.databinding.ActivityMapsBinding;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -60,8 +62,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        // call the function to get the list of school
+        FindSchool_Control.FindSchool(new SchoolList_Callback() {
+            @Override
+            public void onCallBack(ArrayList<Schools> schools) {
+                // here we will have the list of schools -> we need to iterate them through
+                // get the postal code of each school then-> go to the geo convereter api
+                // and get the lat and long-> then we will display the icons
+            }
+        });
 
-        // Add a marker in Sydney and move the camera
+        // add the camera to the current postal code of the student then move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));

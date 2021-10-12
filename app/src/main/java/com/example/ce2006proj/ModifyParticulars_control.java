@@ -92,7 +92,7 @@ public class ModifyParticulars_control
             if(CheckStudentinfo(name,location,age,citizen))
             {
                 // all the info is correct
-                Student student = new Student(name, location, age+2, citizen);
+                Student student = new Student(name, location, age, citizen);
                 ArrayList<Student> students = UserDatabase.user.getChildren_List();
                 if(students.contains(student))
                 {

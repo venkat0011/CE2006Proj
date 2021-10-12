@@ -139,7 +139,7 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.ViewHo
                     public void onClick(View view) {
                         Student selectedStudent = ModifyParticulars_control.GetStudentList().get(getAdapterPosition());
                         // call the other function here
-                        SchoolSelectorControl.setStudent(selectedStudent);
+                        FindSchool_Control.setStudent(selectedStudent);
                         OptionControl.AdvanceMode();
                         Log.e("Th","This way works");
                     }
