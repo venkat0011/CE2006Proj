@@ -20,29 +20,31 @@ import java.util.List;
 public class ServiceDatabase {
     static DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Services")
                                     .child("result").child("records");
-    static ArrayList<Services> services = new ArrayList<>();
 
     // this is the first instance where we will call the fuinction. This one will not have a price range
     // under the filter tab then we  will include a slider to show price range
-    public static void FetchServices(ServiceCallBack serviceCallBack, String agegroup,String citizenship)
+    public static void FetchServices(ServiceCallBack serviceCallBack, String centrecode)
     {
-        Query query = ref.orderByChild("levels_offered").equalTo(agegroup);
+        Query query = ref.orderByChild("centre_code").equalTo(centrecode);
+        ArrayList<Services> services = new ArrayList<>();
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists())
                 {
+                    Log.e("as","snapshot exist for services for "+ centrecode);
                     for(DataSnapshot dataSnapshot: snapshot.getChildren())
                     {
                         Services service = dataSnapshot.getValue(Services.class);
-                        if(service.getCitizenship().equals(citizenship))
-                        {
                             services.add(service);
-                        }
 
                     }
                     //call the interface to send this list to the control class
                     serviceCallBack.onResponse(services);
+                }
+                else
+                {
+                    serviceCallBack.onResponse(null);
                 }
             }
 

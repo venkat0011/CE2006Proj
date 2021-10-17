@@ -4,30 +4,28 @@ public class Services
 {
     private String centre_code;
     private String centre_name;
-    private String class_of_license;
-    private int fees;
+    private String class_of_licence;
+    private String fees;
     private String levels_offered;
-    private String citizenship;
+    private String type_of_citizenship;
     private String type_of_service;
+    private String id;
+    private String remarks;
 
-    public void setCitizenship(String citizenship) {
-        this.citizenship = citizenship;
+    public void setType_of_citizenship(String citizenship) {
+        this.type_of_citizenship = citizenship;
     }
 
-    public String getCitizenship() {
-        return citizenship;
+    public String getType_of_citizenship() {
+        return type_of_citizenship;
     }
 
-    public int getFees() {
+    public String getFees() {
         return fees;
     }
 
     public String getCentre_code() {
         return centre_code;
-    }
-
-    public String getClass_of_license() {
-        return class_of_license;
     }
 
     public String getCentre_name() {
@@ -50,11 +48,8 @@ public class Services
         this.centre_name = centre_name;
     }
 
-    public void setClass_of_license(String class_of_license) {
-        this.class_of_license = class_of_license;
-    }
 
-    public void setFees(int fees) {
+    public void setFees(String fees) {
         this.fees = fees;
     }
 
@@ -65,6 +60,32 @@ public class Services
     public void setType_of_service(String type_of_service) {
         this.type_of_service = type_of_service;
     }
+
+    public void setClass_of_licence(String class_of_licence) {
+        this.class_of_licence = class_of_licence;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getClass_of_licence() {
+        return class_of_licence;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+
 
     public Services () {}
 }

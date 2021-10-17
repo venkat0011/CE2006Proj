@@ -1,5 +1,20 @@
 package com.example.ce2006proj;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.common.base.FinalizablePhantomReference;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,9 +22,14 @@ import java.util.List;
 public class FindSchool_Control {
 
 
+    private Context context;
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     // this method is to find which district the child is in
-    public List<String> FindDistrict(String postal_code)
+    public static List<String> FindDistrict()
     {
         ArrayList<List<String>> districts = new ArrayList<>();
         districts.add(Arrays.asList("01", "02", "03", "04", "05","06"));
@@ -41,7 +61,7 @@ public class FindSchool_Control {
         districts.add(Arrays.asList("75","76"));
         districts.add(Arrays.asList("79","80"));
 
-        String district_code = postal_code.substring(0,1);
+        String district_code = StudentDatabase.student.getLocation().substring(0,2);
         for(List<String> lists: districts)
         {
             if(lists.contains(district_code))
@@ -53,33 +73,68 @@ public class FindSchool_Control {
 
     }
 
-    public static void  FindSchool(SchoolList_Callback callback) // by right this should a return of schools
+    public static void  FindSchool(SchoolCallBack callback) // by right this should a return of schools
     {
-        // first call the service database to get the list of services that match the
-        // the age group of the student
+        // call the school database to get the list of schools that are in the viscinity
+        // then call the services that match eachj of these centre codes
+        // when quering based on centre codes -> compare the centre code
+        // if it is NA then use the TA to query
 
-        // after we get the list of centre codes then we will send to the school database
-        // to find the list of school objects
-
-        ServiceDatabase.FetchServices(new ServiceCallBack() {
+        SchoolDatabase.FetchSchools(new SchoolCallBack() {
             @Override
-            public void onResponse(ArrayList<Services> services) {
-                // we will do the for loop for each services here and display the list of schools
-               ArrayList<Schools> schools = new ArrayList<>();
-                for(Services services1: services)
+            public void onCallback(ArrayList<Schools> school) {
+                Log.e("Control","It is in control callback");
+                ArrayList<Schools> UpdatedSchools =new ArrayList<>();
+                for (Schools school1: school)
                 {
-                    SchoolDatabase.FetchSchools(new SchoolCallBack() {
+                    //Log.e("Finding service for",school1.getCentre_name());
+                    String code = "";
+                    if(school1.getCentre_code().equals("na"))
+                    {
+                        code = school1.getTp_code();
+                    }
+                    else
+                    {
+                        code = school1.getCentre_code();
+                    }
+                    // query for the service that this school provides
+
+                    ServiceDatabase.FetchServices(new ServiceCallBack() {
                         @Override
-                        public void onCallback(Schools school) {
-                            schools.add(school);
+                        public void onResponse(ArrayList<Services> services) {
+                            if(services != null)
+                            {
+                                school1.setService_list(services);
+                                // here check if any of the services match the age group
+                                for(Services services1 : services)
+                                {
+                                    if(services1.getLevels_offered().equals(AgeGroup(StudentDatabase.student.getAge())))
+                                    {
+                                        UpdatedSchools.add(school1);
+                                        Log.e("Services","One of the services match");
+                                        break;
+                                    }
+                                }
+                            }
+                            else if(school1.getPostal_code().equals(school.get(school.size()-1).getPostal_code()))
+                            {
+                                SchoolDatabase.schoolsArrayList = UpdatedSchools;
+                                callback.onCallback(UpdatedSchools);
+
+                            }
+
+
+
+
+
                         }
-                    },services1.getCentre_code());
+                    },code);
 
                 }
-                callback.onCallBack(schools);
+
+
             }
-        },AgeGroup(StudentDatabase.student.getAge())
-                ,Citizenship(StudentDatabase.student.getCitizenship()));
+        });
 
 
 
@@ -144,6 +199,53 @@ public class FindSchool_Control {
     public static void setStudent(Student student )
     {
         StudentDatabase.student = student;
+    }
+
+
+
+
+    public void getCoordinates(String postal)
+    {
+        // go to https://datumsg.com/postal_codes/379499 and see if it is a valid web
+        // if it is not a valid web then it means it is not a valid postal
+        // if we are able to query then find the lat and long and set it in the class
+
+    }
+    public void coordinates(PostalCallback postalCallback, String postal_code)  {
+// ...
+
+// Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="https://nominatim.openstreetmap.org/search.php?country=singapore&postalcode="
+                +postal_code+"&format=json";
+
+// Request a string response from the provided URL.
+        JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONObject obj = (JSONObject) response.get(0);
+                            ArrayList<Double> coordinates = new ArrayList<>();
+                            coordinates.add(Double.parseDouble(obj.getString("lat")));
+                            coordinates.add(Double.parseDouble(obj.getString("lon")));
+                            postalCallback.PostalCallBack(coordinates);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("The code","That didn't work!");
+            }
+        });
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
     }
 
 

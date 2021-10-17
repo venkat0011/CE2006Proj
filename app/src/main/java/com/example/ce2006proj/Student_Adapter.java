@@ -100,10 +100,10 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.ViewHo
                         spinner.setSelection(index);
 
                         Spinner age_spinner = customLayout.findViewById(R.id.age_spinner);
-                        List age_group = Arrays.asList(new String[]{"2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"});
+                        List age_group = Arrays.asList(new String[]{ "2 to 18 mths", "18 mths to 2 yrs old", "3 yrs old", "4 yrs old", "5 yrs old", "6 yrs old"});
                         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(mCtx, android.R.layout.simple_spinner_dropdown_item, age_group);
                         age_spinner.setAdapter(adapter2);
-                        int index1 = items.indexOf(oldstudent.getAge());
+                        int index1 = age_group.indexOf(oldstudent.getAge());
                         age_spinner.setSelection(index1);
 
 
