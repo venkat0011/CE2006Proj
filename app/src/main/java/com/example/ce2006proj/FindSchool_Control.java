@@ -116,7 +116,7 @@ public class FindSchool_Control {
                                     }
                                 }
                             }
-                            else if(school1.getPostal_code().equals(school.get(school.size()-1).getPostal_code()))
+                            if(school1.getPostal_code().equals(school.get(school.size()-1).getPostal_code()))
                             {
                                 SchoolDatabase.schoolsArrayList = UpdatedSchools;
                                 callback.onCallback(UpdatedSchools);
@@ -204,12 +204,37 @@ public class FindSchool_Control {
 
 
 
-    public void getCoordinates(String postal)
+    public void FindServices(SchoolCallBack schoolCallBack)
     {
-        // go to https://datumsg.com/postal_codes/379499 and see if it is a valid web
-        // if it is not a valid web then it means it is not a valid postal
-        // if we are able to query then find the lat and long and set it in the class
+        ServiceDatabase.FetchServices(new ServiceCallBack() {
+            @Override
+            public void onResponse(ArrayList<Services> services) {
+                // for each of the service get the centre code
+                // then go to the school database and get the relevant school
+                for(Services services1:services)
+                {
+                    SchoolDatabase.FetchSchools(new SchoolCallBack() {
+                        @Override
+                        public void onCallback(ArrayList<Schools> school) {
+                            if(school!=null)
+                            {
+                                ArrayList<Services>services2 = new ArrayList<>();
+                                services2.add(services1);
+                                school.get(0).setService_list(services2);
+                                SchoolDatabase.schoolsArrayList.add(school.get(0));
 
+                            }
+
+                            if(services.indexOf(services1)==services.size()-1)
+                            {
+                                schoolCallBack.onCallback(SchoolDatabase.schoolsArrayList);
+
+                            }
+                        }
+                    },services1.getCentre_code());
+                }
+            }
+        });
     }
     public void coordinates(PostalCallback postalCallback, String postal_code)  {
 // ...

@@ -59,5 +59,38 @@ public class SchoolDatabase
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 
+    public static void FetchSchools(SchoolCallBack schoolCallBack, String centre_code)
+    {
+        schoolsArrayList.clear();
+        Query query = ref.orderByChild("centre_code").equalTo(centre_code);
+        ArrayList<Schools>schools = new ArrayList<>();
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren())
+                    {
+                        Schools school = dataSnapshot.getValue(Schools.class);
+                        schools.add(school);
+                        break;
+
+                    }
+                    schoolCallBack.onCallback(schools);
+                }
+                else
+                {
+                    schoolCallBack.onCallback(null);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(valueEventListener);
+    }
+
 
 }
