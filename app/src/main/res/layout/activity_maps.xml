@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center|right|center_horizontal">
+    android:layout_gravity="center|right|center_horizontal"
+    android:onClick="Filter"
+    android:visibility="visible">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,105 +56,240 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/filter_layout"
-        android:layout_width="410dp"
-        android:layout_height="893dp"
-        android:gravity="center|right"
-        android:orientation="vertical"
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="268dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
         android:visibility="invisible">
 
-        <RadioGroup
-            android:layout_width="308dp"
-            android:layout_height="679dp"
-            android:background="@color/white"
-            android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="97dp"
+                android:onClick="Filter"
+                android:visibility="visible" />
+
+            <RadioGroup
+                android:id="@+id/Operating_Hour"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Operating Hours" />
+
+                <RadioButton
+                    android:id="@+id/Full"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Full Day" />
+
+                <RadioButton
+                    android:id="@+id/Half"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Half Day AM" />
+
+                <RadioButton
+                    android:id="@+id/After"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="After School Care" />
+
+                <RadioButton
+                    android:id="@+id/Emergency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Emergency Care" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/Food"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Food " />
+
+                <RadioButton
+                    android:id="@+id/MUIS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MUIS Certified" />
+
+                <RadioButton
+                    android:id="@+id/Halal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Halal (Not MUIS Certified)" />
+
+                <RadioButton
+                    android:id="@+id/Vege"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vegetarian" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/transport"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provision of Transport " />
+
+                <RadioButton
+                    android:id="@+id/Transport_Y"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/Transport_N"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Food " />
+                android:background="@color/white" />
 
-            <RadioButton
-                android:id="@+id/MUIS"
+            <RadioGroup
+                android:id="@+id/language"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="MUIS Certified" />
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="visible">
 
-            <RadioButton
-                android:id="@+id/Halal"
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Second language Offered " />
+
+                <RadioButton
+                    android:id="@+id/Chinese"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chinese " />
+
+                <RadioButton
+                    android:id="@+id/Malay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Malay" />
+
+                <RadioButton
+                    android:id="@+id/Tamil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tamil " />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView13"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Halal (Not MUIS Certified)" />
+                android:layout_height="44dp"
+                android:background="@color/white" />
 
-            <RadioButton
-                android:id="@+id/Vege"
+            <RadioGroup
+                android:id="@+id/Spark"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Vegetarian" />
-        </RadioGroup>
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="visible">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Spark Certified " />
+
+                <RadioButton
+                    android:id="@+id/Spark_Y"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/Spark_N"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/Reset_Filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reset Filters" />
+
+                <Button
+                    android:id="@+id/Filter_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Filter" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </FrameLayout>
-
-<!--    <?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--android:orientation="vertical"-->
-<!--tools:context=".MapsActivity"-->
-<!--android:weightSum="2">-->
-
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:weightSum="1">-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="99dp"-->
-<!--        android:background="#A89C27B0">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/Change_Student"-->
-<!--            android:layout_width="299dp"-->
-<!--            android:layout_height="89dp"-->
-<!--            android:background="#009C27B0"-->
-<!--            android:text="Finding Schools for "-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/Filter_Options"-->
-<!--            android:layout_width="58dp"-->
-<!--            android:layout_height="58dp"-->
-<!--            android:backgroundTint="#009C27B0"-->
-<!--            android:onClick="Filter"-->
-<!--            android:src="@drawable/ic_baseline_filter_alt_24"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.916"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/Change_Student"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.609" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/map"-->
-<!--        android:name="com.google.android.gms.maps.SupportMapFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="749dp" />-->
-
-
-<!--</LinearLayout>-->
-
-
-<!--</LinearLayout>-->

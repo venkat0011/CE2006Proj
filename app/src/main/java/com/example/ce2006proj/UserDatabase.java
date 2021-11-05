@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserDatabase
@@ -28,6 +29,7 @@ public class UserDatabase
         ref1.child("username").setValue(user.getUsername());
         ref1.child("password").setValue(user.getPassword());
         ref1.child("Children").setValue(user.getChildren_List());
+        ref1.child("Schools").setValue(user.getFav_school());
         Log.e("asd","register function called");
 
     }
@@ -70,12 +72,41 @@ public class UserDatabase
         hashMap.put("username",user.getUsername());
         hashMap.put("password",user.getPassword());
         hashMap.put("Children",user.getChildren_List());
+        hashMap.put("Schools",user.getFav_school());
         ref.child(FirebaseKey).updateChildren(hashMap);
 
     }
 
+    public static void FetchFavSchools()
+    {
+        Query query = UserDatabase.ref.child(FirebaseKey).child("Schools");
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            ArrayList<Schools> schools  = new ArrayList<>();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Schools school = snapshot.getValue(Schools.class);
+                        schools.add(school);
+                    }
+                    UserDatabase.user.setFav_school(schools);
+                }
+                else
+                {
+                    UserDatabase.user.setFav_school(schools);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        query.addListenerForSingleValueEvent(valueEventListener);
+    }
 }
+
+
 
 
 

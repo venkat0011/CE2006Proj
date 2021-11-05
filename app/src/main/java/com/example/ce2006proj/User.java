@@ -9,9 +9,17 @@ public class User
     private String Password;
     // when storing password please store the password as an encrypted mode
     private ArrayList<Student> Children_List = new ArrayList<>();
-
+    private ArrayList<Schools> fav_school = new ArrayList();
     public ArrayList<Student> getChildren_List() {
         return Children_List;
+    }
+
+    public ArrayList<Schools> getFav_school() {
+        return fav_school;
+    }
+
+    public void setFav_school(ArrayList<Schools> fav_school) {
+        this.fav_school = fav_school;
     }
 
     public void setChildren_List(ArrayList<Student> children_List) {

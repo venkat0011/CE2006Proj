@@ -6,16 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.model.Marker;
-
-import org.w3c.dom.Text;
 
 public class SchoolPinAdapter implements GoogleMap.InfoWindowAdapter {
     private Context context;
@@ -45,6 +44,21 @@ public class SchoolPinAdapter implements GoogleMap.InfoWindowAdapter {
                                 +"Saturday: " +schools.getSaturday());
             Button button = view.findViewById(R.id.more_info);
             button.setTextColor(Color.BLUE);
+
+            textView1.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
+            button.setVisibility(View.VISIBLE);
+
+//            ImageButton imageButton = view.findViewById(R.id.favButton);
+//            imageButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Log.e("asdasd","fav button clicked");
+//                }
+//            });
+
+
+
 
         }
     }

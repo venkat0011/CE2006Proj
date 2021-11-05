@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.security.cert.PKIXRevocationChecker;
+
 public class MainPage extends AppCompatActivity {
 
     @Override
@@ -30,5 +32,11 @@ public class MainPage extends AppCompatActivity {
         // guest mode can only add
         OptionControl.option_context = MainPage.this;
         OptionControl.FindSchool();
+    }
+
+    public void Favourite(View view)
+    {
+        OptionControl.option_context = MainPage.this;
+        OptionControl.Fav_school();
     }
 }

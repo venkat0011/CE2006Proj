@@ -30,6 +30,11 @@ public class OptionControl
         Intent i = new Intent(option_context, MapsActivity.class);
         option_context.startActivity(i);
     }
+    public static void Fav_school()
+    {
+        Intent i = new Intent(option_context, Favourites.class);
+        option_context.startActivity(i);
+    }
 
 
 }

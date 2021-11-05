@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class StudentDatabase
 {
     static Student student;
-    public static void FetchChildren(FirebaseStudentCallback callback) {
+    public static void FetchChildren() {
         Query query = UserDatabase.ref.child(UserDatabase.FirebaseKey).child("Children").orderByChild("name");
         ValueEventListener valueEventListener = new ValueEventListener() {
             ArrayList<Student>students = new ArrayList<>();
@@ -26,7 +26,7 @@ public class StudentDatabase
                         students.add(student);
                         Log.e("name in loop", student.getName());
                     }
-                    callback.onResponse(students);
+                    UserDatabase.user.setChildren_List(students);
                 }
                 else
                 {

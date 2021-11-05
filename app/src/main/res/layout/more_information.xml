@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="393dp"
+        android:layout_height="164dp"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/favourite_btn"
+            android:layout_width="89dp"
+            android:layout_height="92dp"
+            android:backgroundTint="#009C27B0"
+            android:src="@drawable/filter_border"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/comapreBtn"
+            android:layout_width="185dp"
+            android:layout_height="74dp"
+            android:text="Add to Compare +"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.478"
+            app:layout_constraintStart_toEndOf="@+id/favourite_btn"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="33dp" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+
+            <TextView
+                android:id="@+id/food_offered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="39dp" />
+
+            <TextView
+                android:id="@+id/language_offered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+
+            <TextView
+                android:id="@+id/working_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:id="@+id/sat_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:id="@+id/extended_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+
+            <TextView
+                android:id="@+id/gov_subs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:id="@+id/levels_prov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:id="@+id/sparl_cert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:id="@+id/transport_prov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+
+            <TextView
+                android:id="@+id/website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:id="@+id/contact_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:ellipsize="end"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

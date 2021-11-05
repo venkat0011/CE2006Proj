@@ -31,8 +31,10 @@
         android:onClick="FindSchool"/>
 
     <Button
+        android:id="@+id/favourite"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        android:onClick="Favourite"
         android:text="View Favourites"
         app:layout_constraintBottom_toTopOf="@+id/Find_School"
         app:layout_constraintEnd_toEndOf="parent"

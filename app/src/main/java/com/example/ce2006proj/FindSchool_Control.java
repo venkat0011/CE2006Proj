@@ -1,6 +1,7 @@
 package com.example.ce2006proj;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -8,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.FinalizablePhantomReference;
 
@@ -15,15 +17,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.LogRecord;
 
 public class FindSchool_Control {
 
 
     private Context context;
-
+    public  Filter_Control filter_control = new Filter_Control();
     public void setContext(Context context) {
         this.context = context;
     }
@@ -241,37 +245,69 @@ public class FindSchool_Control {
 
 // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="https://nominatim.openstreetmap.org/search.php?country=singapore&postalcode="
-                +postal_code+"&format=json";
+        String url = "https://developers.onemap.sg/commonapi/search?searchVal=" +postal_code+
+                "&returnGeom=Y&getAddrDetails=N";
 
 // Request a string response from the provided URL.
-        JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONArray>() {
+
+                JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    JSONArray array = response.getJSONArray("results");
+                                    JSONObject jsonObject = (JSONObject) array.get(0);
+                                    ArrayList<Double> coordinates = new ArrayList<>();
+                                    coordinates.add(Double.parseDouble(jsonObject.getString("LATITUDE")));
+                                    coordinates.add(Double.parseDouble(jsonObject.getString("LONGITUDE")));
+                                    postalCallback.PostalCallBack(coordinates);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            JSONObject obj = (JSONObject) response.get(0);
-                            ArrayList<Double> coordinates = new ArrayList<>();
-                            coordinates.add(Double.parseDouble(obj.getString("lat")));
-                            coordinates.add(Double.parseDouble(obj.getString("lon")));
-                            postalCallback.PostalCallBack(coordinates);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("The code","That didn't work!");
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("The code","That didn't work!");
-            }
-        });
+                });
 
 // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+                queue.add(stringRequest);
+            }
+
+    public String FavSchools(Schools schools)
+    {
+        ArrayList<Schools> schools1 = UserDatabase.user.getFav_school();
+        if(schools1.isEmpty())
+        {
+            schools1.add(schools);
+            UserDatabase.user.setFav_school(schools1);
+            UserDatabase.UpdateUser(UserDatabase.user);
+            return "School added to your favourite list";
+        }
+        else
+        {
+            if(schools1.contains(schools))
+            {
+                return "School already exist in your favourites";
+            }
+            else
+            {
+                schools1.add(schools);
+                UserDatabase.user.setFav_school(schools1);
+                UserDatabase.UpdateUser(UserDatabase.user);
+                return "School added to your favourite list";
+            }
+        }
+    }
+
 
     }
 
 
-}
+
+
+

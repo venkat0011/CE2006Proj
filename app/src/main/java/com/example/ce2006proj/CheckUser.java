@@ -76,12 +76,8 @@ public class CheckUser {
                         {
                             UserDatabase.user = user;
                             // at this point we need to get the children associated with that user
-                            StudentDatabase.FetchChildren(new FirebaseStudentCallback() {
-                                @Override
-                                public void onResponse(ArrayList<Student> student) {
-                                    UserDatabase.user.setChildren_List(student);
-                                }
-                            });
+                            StudentDatabase.FetchChildren();
+                            UserDatabase.FetchFavSchools();
                             userAutenticationCallback.onResponse("WELCOME ");
                             Intent i = new Intent(context, MainPage.class);
                             context.startActivity(i);

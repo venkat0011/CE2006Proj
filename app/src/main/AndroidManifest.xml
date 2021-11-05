@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ce2006proj">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -9,6 +8,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CE2006PROJ">
+        <activity
+            android:name=".Favourites"
+            android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -40,8 +43,8 @@
             android:exported="true" />
         <activity
             android:name=".ModifyParticulars"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainPage"
             android:exported="true" />
@@ -54,10 +57,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
 
 </manifest>

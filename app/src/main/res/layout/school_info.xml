@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,41 +13,44 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/title"
             android:layout_gravity="center_horizontal"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="#000"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="14sp"
             android:textColor="#000"
-            android:id="@+id/Address"/>
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <TextView
+            android:id="@+id/Operating_Hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="5"
-            android:textSize="14sp"
             android:textColor="#000"
-            android:id="@+id/Operating_Hour"/>
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/more_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="More information"
             android:background="#FFF"
-            android:textColor="#FFF" />
+            android:text="More information"
+            android:textColor="#FFF"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
